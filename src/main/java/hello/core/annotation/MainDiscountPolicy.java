@@ -9,6 +9,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-@Qualifier("mainDiscoutPolicy") // 그러면 MainDiscountPolicy 애노테이션을 쓰면 위 기능이 다 동작한다.
+@Qualifier("mainDiscountPolicy") // 그러면 MainDiscountPolicy 애노테이션을 쓰면 위 기능이 다 동작한다.
 public @interface MainDiscountPolicy {
 }

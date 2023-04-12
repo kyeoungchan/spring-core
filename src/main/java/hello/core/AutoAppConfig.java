@@ -7,6 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
 @Configuration
 @ComponentScan(
         basePackages = "hello.core.member",

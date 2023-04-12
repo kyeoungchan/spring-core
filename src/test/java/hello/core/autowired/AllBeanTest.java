@@ -29,24 +29,31 @@ public class AllBeanTest {
 
         int rateDiscountPrice = discountService.discount(member, 20000, "rateDiscountPolicy");
         assertThat(rateDiscountPrice).isEqualTo(2000);
+
+        /* DiscountService는 싱글톤이 맞지만, @Configuration 애노테이션이 없기 때문에 스프링 싱글톤 레지스트리에 의해 관리되는 싱글톤이 아닌 static 클래스에 의해 생성되는 싱글톤이다.
+         * .getClass()를 통해 보면 CGLIB에 의해 조작된 객체가 아닌 그냥 객체 결과가 출력된다.*/
+        System.out.println("discountService = " + discountService.getClass());
+        DiscountService discountService2 = ac.getBean(DiscountService.class);
+        assertThat(discountService).isSameAs(discountService2);
     }
 
     static class DiscountService {
         private final Map<String, DiscountPolicy> policyMap;
         private final List<DiscountPolicy> policies;
 
-        @Autowired
+        //        @Autowired
         public DiscountService(Map<String, DiscountPolicy> policyMap, List<DiscountPolicy> policies) {
             this.policyMap = policyMap;
             this.policies = policies;
-            System.out.println("policyMap = " + policyMap);
-            System.out.println("policies = " + policies);
+            System.out.println("policyMap = " + policyMap.getClass());
+            System.out.println("policies = " + policies.getClass());
         }
 
         public int discount(Member member, int price, String discountCode) {
             DiscountPolicy discountPolicy = policyMap.get(discountCode);
             return discountPolicy.discount(member, price);
         }
+
     }
 
 }
