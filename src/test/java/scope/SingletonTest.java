@@ -5,7 +5,9 @@ import jakarta.annotation.PreDestroy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 public class SingletonTest {
 
@@ -13,6 +15,7 @@ public class SingletonTest {
     public void singletonBeanFind() {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SingletonBean.class); // 사실 AnnotationConfigApplicationContext의 Parameter는 컴포넌트 클래스를 넣어주면 된다.
 
+        System.out.println("singleton bean test start");
         SingletonBean singletonBean1 = ac.getBean(SingletonBean.class);
         SingletonBean singletonBean2 = ac.getBean(SingletonBean.class);
         System.out.println("singletonBean1 = " + singletonBean1);

@@ -43,9 +43,18 @@ public class SingletonWithPrototypeTest1 {
 
     @Scope("singleton") // default 값이므로 안 해줘도 된다.
     static class ClientBean {
+
+//        private final PrototypeBean prototypeBean;
+//
+//        @Autowired
+//        public ClientBean(PrototypeBean prototypeBean) {
+//            this.prototypeBean = prototypeBean;
+//        }
+
         @Autowired
         private Provider<PrototypeBean> prototypeBeanProvider;
 //        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+
 
         public int logic() {
             PrototypeBean prototypeBean = prototypeBeanProvider.get();
